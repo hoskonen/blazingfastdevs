@@ -1,18 +1,14 @@
 import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom';
-import {Button, Card, Grid, Icon, Modal, Segment} from "semantic-ui-react";
+import {Button, Card, Grid, Icon, Modal, Segment, Image} from "semantic-ui-react";
 import axios from "axios";
-
-interface IDataModel {
-    id: number,
-    uid: string,
-    first_name: string,
-    last_name: string
-}
+import {IDataModel, ISelectedModel} from "../models/Models";
+import { Developer } from '../components/Developer';
 
 export const Developers = () => {
     const [appState, setAppState] = React.useState<IDataModel[]>([]);
-    const [selectedDetail, setSelectedDetail] = React.useState({});
+    const [selectedDetail, setSelectedDetail] = React.useState<ISelectedModel | null>(null);
+    const [selectedDevs, setSelectedDevs] = React.useState<any[]>([]);
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
     
     
@@ -31,8 +27,19 @@ export const Developers = () => {
     }, [setAppState]);
     
     const getDetail = (uid: string) => {
-        let detail = appState.filter(x => x.uid === uid);
+        let detail = appState.filter(detail => detail.uid === uid);
         setSelectedDetail(detail[0]);
+    }
+    
+    const pickDeveloper = (uid: string) => {
+        let pick = appState.find(detail => detail.uid === uid);
+        
+        if (selectedDevs.find(detail => detail.uid === uid)) {
+            return
+        } else {
+            setSelectedDevs([...selectedDevs, pick]);
+            console.log('developers', selectedDevs);
+        }
     }
 
     return (
@@ -45,55 +52,32 @@ export const Developers = () => {
                         </Grid.Column>
                     </Grid.Row>
 
-                    
+
                     <Grid.Row>
-                            { appState.map((person: any) => (
-                                <Grid.Column computer={6} mobile={6}>
-                                    <Card key={person.uid} style={{marginBottom: '2rem'}}>
-                                        <Card.Content>
-                                            <Card.Header>{person.first_name}</Card.Header>
-                                            <Card.Meta>
-                                                <span className='date'>{person.date_of_birth}</span>
-                                            </Card.Meta>
-                                            <Card.Description>
-                                                {person.employment.title}
-                                            </Card.Description>
-                                        </Card.Content>
-                                        <Card.Content extra>
-                                            <a>
-                                                <Icon name='user' />
-                                                {person.phone_number}
-                                            </a>
-                                            <Segment>
-                                                <Button 
-                                                    positive
-                                                >
-                                                    Hire Me!
-                                                </Button>
-                                                <Button
-                                                    onClick={() => {
-                                                        getDetail(person.uid);
-                                                        setIsOpen(true);
-                                                    }}
-                                                >
-                                                    Details
-                                                </Button>
-                                            </Segment>
-                                        </Card.Content>
-                                    </Card>
-                        </Grid.Column>
-                            ))}
+                        {appState.map((person: any) => (
+                            <Grid.Column computer={6} mobile={6}>
+                                <Developer
+                                    person={person}
+                                    pickDeveloper={pickDeveloper}
+                                    getDetail={getDetail}
+                                    setIsOpen={setIsOpen}
+                                />
+                            </Grid.Column>
+                        ))}
                     </Grid.Row>
                 </Grid>
-                
+
                 <Modal
                     onClose={() => setIsOpen(false)}
                     onOpen={() => setIsOpen(true)}
                     open={isOpen}
                 >
-                    <Modal.Header>Select a Photo</Modal.Header>
-                    <Modal.Content>
-                       
+                    <Modal.Header>{selectedDetail?.first_name}</Modal.Header>
+                    <Modal.Content image>
+                        <Image size='medium' src={selectedDetail?.avatar} wrapped/>
+                        <ul>
+                            <li>Name: {selectedDetail?.first_name} {selectedDetail?.last_name}</li>
+                        </ul>
                     </Modal.Content>
                     <Modal.Actions>
                         <Button color='black' onClick={() => setIsOpen(false)}>
@@ -103,5 +87,5 @@ export const Developers = () => {
                 </Modal>
             </div>
         </>
-    )
+    );
 }
