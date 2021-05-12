@@ -1,8 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import {Card, Grid, Icon} from "semantic-ui-react";
+import axios from "axios";
 
 export const Developers = () => {
+    const [appState, setAppState] = React.useState({ loading: false, data: null });
+    
+    useEffect(() => {
+        setAppState({loading: true, data: null});
+        const apiUrl = 'https://api.thecatapi.com/v1/images/search';
+            const fetchData = async () => {
+                const result = await axios.get(apiUrl);
+                
+                setAppState({loading: false, data: result.data });
+                console.log(appState.data)
+            }
+            
+            fetchData();
+    }, []);
+    
     return (
         <>
             <div>

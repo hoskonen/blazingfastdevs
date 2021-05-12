@@ -1,13 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {Navigation} from "./global-components/Navigation";
+import axios from 'axios';
 
-function App() {
+export const App = () => {
   return (
     <div className="App">
         <Navigation />
     </div>
   );
 }
-
-export default App;
