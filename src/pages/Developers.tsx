@@ -4,21 +4,21 @@ import {Card, Grid, Icon} from "semantic-ui-react";
 import axios from "axios";
 
 export const Developers = () => {
-    const [appState, setAppState] = React.useState({ loading: false, data: null });
+    const [appState, setAppState] = React.useState([]);
     
     useEffect(() => {
-        setAppState({loading: true, data: null});
-        const apiUrl = 'https://api.thecatapi.com/v1/images/search';
+        setAppState([]);
+        const apiUrl = 'https://random-data-api.com/api/users/random_user?size=10';
             const fetchData = async () => {
                 const result = await axios.get(apiUrl);
                 
-                setAppState({loading: false, data: result.data });
-                console.log(appState.data)
+                setAppState(result.data);
+                console.log(appState)
             }
             
             fetchData();
-    }, []);
-    
+    }, [setAppState]);
+
     return (
         <>
             <div>
@@ -32,23 +32,25 @@ export const Developers = () => {
                     
                     <Grid.Row>
                         <Grid.Column computer={12} mobile={12}>
-                            <Card>
-                                <Card.Content>
-                                    <Card.Header>Matthew</Card.Header>
-                                    <Card.Meta>
-                                        <span className='date'>Joined in 2015</span>
-                                    </Card.Meta>
-                                    <Card.Description>
-                                        Matthew is a musician living in Nashville.
-                                    </Card.Description>
-                                </Card.Content>
-                                <Card.Content extra>
-                                    <a>
-                                        <Icon name='user' />
-                                        22 Friends
-                                    </a>
-                                </Card.Content>
-                            </Card>
+                            { appState.map((person: any) => (
+                                <Card key={person.uid}>
+                                    <Card.Content>
+                                        <Card.Header>{person.first_name}</Card.Header>
+                                        <Card.Meta>
+                                            <span className='date'>{person.date_of_birth}</span>
+                                        </Card.Meta>
+                                        <Card.Description>
+                                            Matthew is a musician living in Nashville.
+                                        </Card.Description>
+                                    </Card.Content>
+                                    <Card.Content extra>
+                                        <a>
+                                            <Icon name='user' />
+                                            22 Friends
+                                        </a>
+                                    </Card.Content>
+                                </Card>
+                            ))}
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
