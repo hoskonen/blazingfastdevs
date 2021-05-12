@@ -1,24 +1,62 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+
+import {Menu} from "semantic-ui-react";
+import {Home} from "./pages/Home";
+import {MyTeam} from "./pages/MyTeam";
+import {Developers} from "./pages/Developers";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Router>
+          <div>
+            <Menu>
+              <Link to="/">
+                <Menu.Item
+                    name='home'
+                    // active={activeItem === 'home'}
+                    // onClick={this.handleItemClick}
+                >
+                  Home
+                </Menu.Item>
+              </Link>
+
+              <Link to="/developers">
+                <Menu.Item
+                    name='developers'
+                    // active={activeItem === 'developers'}
+                    // onClick={this.handleItemClick}
+                >
+                  Developers
+                </Menu.Item>
+              </Link>
+
+              <Link to="/myteam">
+                <Menu.Item
+                    name='myteam'
+                    // active={activeItem === 'myteam'}
+                    // onClick={this.handleItemClick}
+                >
+                  My Team
+                </Menu.Item>
+              </Link>
+            </Menu>
+            
+            <Switch>
+              <Route path="/developers">
+                <Developers />
+              </Route>
+              <Route path="/myteam">
+                <MyTeam />
+              </Route>
+              <Route path="/">
+                <Home />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
     </div>
   );
 }
