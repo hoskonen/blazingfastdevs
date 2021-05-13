@@ -33,7 +33,9 @@ export const Developer = (props: IProps) => {
                 <Segment>
                     <Button
                         positive
-                        onClick={() => props.pickDeveloper(props.person.uid)}
+                        onClick={() => {
+                            props.pickDeveloper(props.person.uid)
+                        }}
                     >
                         Hire Me!
                     </Button>

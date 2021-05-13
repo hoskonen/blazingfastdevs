@@ -1,14 +1,16 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import {Button, Card, Grid, Icon, Modal, Segment, Image} from "semantic-ui-react";
 import axios from "axios";
 import {IDataModel, ISelectedModel} from "../models/Models";
 import { Developer } from '../components/Developer';
+import {SelectedDevelopersContext} from "../contexts/selected-developers-context";
 
 export const Developers = () => {
     const [appState, setAppState] = React.useState<IDataModel[]>([]);
-    const [selectedDetail, setSelectedDetail] = React.useState<ISelectedModel | null>(null);
-    const [selectedDevs, setSelectedDevs] = React.useState<any[]>([]);
+    const [selectedDetail, setSelectedDetail] = React.useState<ISelectedModel | null>();
+    const [selectedDevs, setSelectedDevs] = useContext(SelectedDevelopersContext);
+
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
     
     

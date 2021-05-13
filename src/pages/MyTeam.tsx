@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import ReactDOM from 'react-dom';
 import {Card, Grid, Icon} from "semantic-ui-react";
+import {SelectedDevelopersContext} from "../contexts/selected-developers-context";
 
 export const MyTeam = () => {
+    const [selectedDevs, setSelectedDevs] = useContext(SelectedDevelopersContext);
+    console.log('this is from my team', selectedDevs);
+    
     return (
         <>
             <div>
