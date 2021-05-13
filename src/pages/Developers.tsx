@@ -56,7 +56,7 @@ export const Developers = () => {
 
 
                     <Grid.Row>
-                        {appState.map((person: any) => (
+                        {appState.map((person: IDataModel) => (
                             <Grid.Column computer={6} mobile={6}>
                                 <Developer
                                     person={person}
