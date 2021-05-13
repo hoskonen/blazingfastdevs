@@ -13,7 +13,7 @@ interface IProps {
 }
 
 export const Developer = (props: IProps) => {
-    const playSoundSFX = (sample: any) => {
+    const PlaySoundSFX = (sample: any) => {
         const [play] = useSound(sample);
     }
     
@@ -41,7 +41,7 @@ export const Developer = (props: IProps) => {
                         positive
                         onClick={() => {
                             props.pickDeveloper(props.person.uid)
-                            playSoundSFX(cash);
+                            // PlaySoundSFX(cash);
                         }}
                     >
                         Hire Me!
