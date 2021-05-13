@@ -23,47 +23,48 @@ export const MyTeam = () => {
                 <Grid columns={10} centered={true}>
                     <Grid.Row>
                         <Grid.Column computer={12} mobile={12}>
-                            <div className="content">
-                            <h1>Selected developers for team</h1>
-                            {selectedDevs.map((developer: IDataModel) => (
-                                <Card
-                                key={developer.uid}
-                                style={{marginBottom: '2rem'}}
-                                className=""
-                                >
-                                    <Card.Content>
-                                        <Card.Header>{developer.first_name}</Card.Header>
-                                        <Card.Meta>
-                                        <span className='date'>{developer.date_of_birth}</span>
-                                        </Card.Meta>
-                                        <Card.Description>
-                                    {developer.employment.title}
-                                        </Card.Description>
-                                    </Card.Content>
-                                    <a>
-                                    <Icon name='user' />
-                                {developer.phone_number}
-                                    </a>
-                                    <Segment>
-                                        <Button 
-                                            negative
-                                            onClick={() => {
-                                                removeDeveloper(developer.uid)
-                                                play()
-                                            }}
-                                        >Remove
-                                        </Button>
-                                    </Segment>
-                                </Card>
-                                ))}
-                                
-                            {selectedDevs.length < 1 &&
-                            <h1>Oh noes 🤮 Who's is going to code now! 🤨</h1>
-                            }
-                            </div>
+                                { selectedDevs.length > 1 && <h1>Selected developers for team</h1> }
+                                {selectedDevs.map((developer: IDataModel) => (
+                                    <Card
+                                        key={developer.uid}
+                                        style={{marginBottom: '2rem'}}
+                                    >
+                                        <Card.Content>
+                                            <Card.Header>{developer.first_name}</Card.Header>
+                                            <Card.Meta>
+                                                <span className='date'>{developer.date_of_birth}</span>
+                                            </Card.Meta>
+                                            <Card.Description>
+                                                {developer.employment.title}
+                                            </Card.Description>
+                                        <a>
+                                        <Icon name='user' />
+                                    {developer.phone_number}
+                                        </a>
+                                        </Card.Content>
+                                        <Segment>
+                                            <Button 
+                                                negative
+                                                onClick={() => {
+                                                    removeDeveloper(developer.uid)
+                                                    play()
+                                                }}
+                                            >Remove
+                                            </Button>
+                                        </Segment>
+                                    </Card>
+                                    ))}
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
+                
+                {selectedDevs.length < 1 && <>
+                    <div className="note">
+                        <h1>Oh noes 🤮 Who's is going to code now! 🤨</h1>
+                    </div>
+                </>
+                }
+                
             </div>
         </>
     )
