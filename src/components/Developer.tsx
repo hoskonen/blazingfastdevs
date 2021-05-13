@@ -2,6 +2,9 @@ import React, {Dispatch, SetStateAction} from 'react';
 import ReactDOM from 'react-dom';
 import {Button, Card, Grid, Icon, Segment} from "semantic-ui-react";
 import {IDataModel, ISelectedModel} from "../models/Models";
+import useSound from 'use-sound';
+// import { cash } from '/src/sound/cash.mp3';
+        
 interface IProps {
     person: IDataModel
     pickDeveloper: (uid: string) => void,
@@ -10,11 +13,14 @@ interface IProps {
 }
 
 export const Developer = (props: IProps) => {
+    const playSoundSFX = (sample: any) => {
+        const [play] = useSound(sample);
+    }
+    
     return (
         <Card
             key={props.person.uid}
             style={{marginBottom: '2rem'}}
-            className=""
         >
             <Card.Content>
                 <Card.Header>{props.person.first_name}</Card.Header>
@@ -35,6 +41,7 @@ export const Developer = (props: IProps) => {
                         positive
                         onClick={() => {
                             props.pickDeveloper(props.person.uid)
+                            playSoundSFX(cash);
                         }}
                     >
                         Hire Me!
