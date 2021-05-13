@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import {Button, Card, Grid, Icon, Modal, Segment, Image} from "semantic-ui-react";
 import axios from "axios";
-import {IDataModel, ISelectedModel} from "../models/Models";
+import {IDataModel, ISelectableDeveloper, ISelectedModel} from "../models/Models";
 import { Developer } from '../components/Developer';
 import {SelectedDevelopersContext} from "../contexts/selected-developers-context";
 
@@ -10,9 +10,7 @@ export const Developers = () => {
     const [appState, setAppState] = React.useState<IDataModel[]>([]);
     const [selectedDetail, setSelectedDetail] = React.useState<ISelectedModel | null>();
     const [selectedDevs, setSelectedDevs] = useContext(SelectedDevelopersContext);
-
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
-    
     
     useEffect(() => {
         setAppState([]);
@@ -51,10 +49,9 @@ export const Developers = () => {
                         </Grid.Column>
                     </Grid.Row>
 
-
                     <Grid.Row>
                         {appState.map((person: IDataModel) => (
-                            <Grid.Column computer={6} mobile={6}>
+                            <Grid.Column computer={6} mobile={6} key={person.uid}>
                                 <Developer
                                     person={person}
                                     pickDeveloper={pickDeveloper}

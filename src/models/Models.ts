@@ -21,3 +21,8 @@ export interface ISelectedModel {
 export interface IEmploymentModel {
     title: string
 }
+
+export interface ISelectableDeveloper {
+    isSelected: boolean,
+    personData: IDataModel
+}

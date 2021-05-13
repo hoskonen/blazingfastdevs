@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import './App.css';
 import {Navigation} from "./global-components/Navigation";
-import axios from 'axios';
 import {SelectedDevelopersContextProvider} from "./contexts/selected-developers-context-provider";
 
 export const App = () => {
