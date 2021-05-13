@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import {Button, Card, Grid, Icon, Segment} from "semantic-ui-react";
 import {IDataModel, ISelectedModel} from "../models/Models";
 import useSound from 'use-sound';
-        
+import cashcashcash from '../sound/cash.mp3';
+
 interface IProps {
     person: IDataModel
     pickDeveloper: (uid: string) => void,
@@ -12,9 +13,7 @@ interface IProps {
 }
 
 export const Developer = (props: IProps) => {
-    const cashSample = require('../sound/cash.mp3');
-    
-    const [play] = useSound(cashSample, {volume: 0.75 });
+    const [play] = useSound(cashcashcash, {volume: 0.75 });
     
     return (
         <Card

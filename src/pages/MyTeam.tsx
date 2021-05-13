@@ -4,9 +4,12 @@ import {Button, Card, Grid, Icon, Segment} from "semantic-ui-react";
 import {SelectedDevelopersContext} from "../contexts/selected-developers-context";
 import {Developer} from "../components/Developer";
 import {IDataModel} from "../models/Models";
+import shotgun from '../sound/shotgun.mp3';
+import useSound from "use-sound";
 
 export const MyTeam = () => {
     const [selectedDevs, setSelectedDevs] = useContext(SelectedDevelopersContext);
+    const [play] = useSound(shotgun, {volume: 0.75 });
     
     const removeDeveloper = (uid: string) => {
         setSelectedDevs(prevSelectedDevs => (
@@ -44,7 +47,10 @@ export const MyTeam = () => {
                                     <Segment>
                                         <Button 
                                             negative
-                                            onClick={() => removeDeveloper(developer.uid)}
+                                            onClick={() => {
+                                                removeDeveloper(developer.uid)
+                                                play()
+                                            }}
                                         >Remove
                                         </Button>
                                     </Segment>
