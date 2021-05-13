@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import {Button, Card, Grid, Icon, Segment} from "semantic-ui-react";
 import {IDataModel, ISelectedModel} from "../models/Models";
 import useSound from 'use-sound';
-// import { cash } from '/src/sound/cash.mp3';
         
 interface IProps {
     person: IDataModel
@@ -13,9 +12,9 @@ interface IProps {
 }
 
 export const Developer = (props: IProps) => {
-    const PlaySoundSFX = (sample: any) => {
-        const [play] = useSound(sample);
-    }
+    const cashSample = require('../sound/cash.mp3');
+    
+    const [play] = useSound(cashSample, {volume: 0.75 });
     
     return (
         <Card
@@ -40,8 +39,8 @@ export const Developer = (props: IProps) => {
                     <Button
                         positive
                         onClick={() => {
+                            play()
                             props.pickDeveloper(props.person.uid)
-                            // PlaySoundSFX(cash);
                         }}
                     >
                         Hire Me!

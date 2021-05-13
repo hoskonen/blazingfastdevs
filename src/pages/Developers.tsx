@@ -22,8 +22,6 @@ export const Developers = () => {
                 
                 setAppState(result.data);
             }
-
-        console.log(appState)
             
             fetchData();
     }, [setAppState]);
@@ -40,7 +38,6 @@ export const Developers = () => {
             return
         } else {
             setSelectedDevs([...selectedDevs, pick]);
-            console.log('developers', selectedDevs);
         }
     }
 
