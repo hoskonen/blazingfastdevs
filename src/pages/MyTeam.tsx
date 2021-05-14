@@ -12,6 +12,9 @@ export const MyTeam = () => {
     const [play] = useSound(shotgun, {volume: 0.50 });
     
     const removeDeveloper = (uid: string) => {
+        let pick = selectedDevs.find(developer => developer.uid === uid);
+        pick.isSelected = false;
+        
         setSelectedDevs(prevSelectedDevs => (
             prevSelectedDevs.filter(developer => developer.uid !== uid)
         ));
