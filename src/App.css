@@ -56,4 +56,5 @@ ul {
 
 .ui.card.selected {
   border: 5px solid #21ba45;
+  transform: rotate(9deg);
 }

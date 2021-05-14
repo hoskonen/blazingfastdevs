@@ -1,8 +1,6 @@
 import React, {useContext} from 'react';
-import ReactDOM from 'react-dom';
 import {Button, Card, Grid, Icon, Segment} from "semantic-ui-react";
 import {SelectedDevelopersContext} from "../contexts/selected-developers-context";
-import {Developer} from "../components/Developer";
 import {IDataModel} from "../models/Models";
 import shotgun from '../sound/shotgun.mp3';
 import useSound from "use-sound";

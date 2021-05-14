@@ -19,6 +19,7 @@ export const Developer = (props: IProps) => {
             key={props.person.uid}
             style={{marginBottom: '2rem'}}
             className={props.isSelected ? 'selected' : ''}
+            raised
         >
             <Card.Content>
                 <Card.Header>{props.person.first_name}</Card.Header>

@@ -26,10 +26,9 @@ export const Developers = (props: IProps) => {
     const pickDeveloper = (uid: string) => {
         let pick = props.appState.find(detail => detail.uid === uid);
         
-        if (pick !== undefined) {
+        if (pick !== undefined || pick === false) {
             pick.isSelected = true
-            console.log(pick);
-        }
+        } 
         
         if (selectedDevs.find(detail => detail.uid === uid)) {
             return
