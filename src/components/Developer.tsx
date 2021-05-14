@@ -1,24 +1,24 @@
-import React, {Dispatch, SetStateAction} from 'react';
+import React, {Dispatch, SetStateAction, useContext} from 'react';
 import ReactDOM from 'react-dom';
 import {Button, Card, Grid, Icon, Segment} from "semantic-ui-react";
 import {IDataModel, ISelectedModel} from "../models/Models";
-import useSound from 'use-sound';
-import cashcashcash from '../sound/cash.mp3';
 
 interface IProps {
     person: IDataModel
     pickDeveloper: (uid: string) => void,
     getDetail: (uid: string) => void,
-    setIsOpen: Dispatch<SetStateAction<boolean>>;
+    setIsOpen: Dispatch<SetStateAction<boolean>>,
+    isSelected: boolean
+    playSample: () => void
 }
 
 export const Developer = (props: IProps) => {
-    const [play] = useSound(cashcashcash, {volume: 0.75 });
     
     return (
         <Card
             key={props.person.uid}
             style={{marginBottom: '2rem'}}
+            className={props.isSelected ? 'selected' : ''}
         >
             <Card.Content>
                 <Card.Header>{props.person.first_name}</Card.Header>
@@ -38,7 +38,7 @@ export const Developer = (props: IProps) => {
                     <Button
                         positive
                         onClick={() => {
-                            play()
+                            props.playSample()
                             props.pickDeveloper(props.person.uid)
                         }}
                     >

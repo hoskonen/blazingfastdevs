@@ -7,6 +7,7 @@ export interface IDataModel {
     date_of_birth: string,
     employment: IEmploymentModel,
     phone_number: string,
+    isSelected: boolean
 }
 
 export interface ISelectedModel {
@@ -20,9 +21,4 @@ export interface ISelectedModel {
 
 export interface IEmploymentModel {
     title: string
-}
-
-export interface ISelectableDeveloper {
-    isSelected: boolean,
-    personData: IDataModel
 }

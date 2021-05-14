@@ -53,3 +53,7 @@ ul {
   align-items: center;
   height: 80vh;
 }
+
+.ui.card.selected {
+  border: 5px solid #21ba45;
+}

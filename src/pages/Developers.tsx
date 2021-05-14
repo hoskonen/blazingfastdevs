@@ -2,35 +2,33 @@ import React, {useContext, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import {Button, Card, Grid, Icon, Modal, Segment, Image} from "semantic-ui-react";
 import axios from "axios";
-import {IDataModel, ISelectableDeveloper, ISelectedModel} from "../models/Models";
+import {IDataModel, ISelectedModel} from "../models/Models";
 import { Developer } from '../components/Developer';
 import {SelectedDevelopersContext} from "../contexts/selected-developers-context";
+import cashcashcash from '../sound/cash.mp3';
+import useSound from "use-sound";
 
-export const Developers = () => {
-    const [appState, setAppState] = React.useState<IDataModel[]>([]);
+interface IProps {
+    appState: IDataModel[]    
+}
+
+export const Developers = (props: IProps) => {
     const [selectedDetail, setSelectedDetail] = React.useState<ISelectedModel | null>();
     const [selectedDevs, setSelectedDevs] = useContext(SelectedDevelopersContext);
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
-    
-    useEffect(() => {
-        setAppState([]);
-        const apiUrl = 'https://random-data-api.com/api/users/random_user?size=10';
-            const fetchData = async () => {
-                const result = await axios.get(apiUrl);
-                
-                setAppState(result.data);
-            }
-            
-            fetchData();
-    }, [setAppState]);
+    const [play] = useSound(cashcashcash, {volume: 0.75 });
     
     const getDetail = (uid: string) => {
-        let detail = appState.filter(detail => detail.uid === uid);
+        let detail = props.appState.filter(detail => detail.uid === uid);
         setSelectedDetail(detail[0]);
     }
     
     const pickDeveloper = (uid: string) => {
-        let pick = appState.find(detail => detail.uid === uid);
+        let pick = props.appState.find(detail => detail.uid === uid);
+        
+        if (pick !== undefined) {
+            pick.isSelected = true
+        }
         
         if (selectedDevs.find(detail => detail.uid === uid)) {
             return
@@ -50,13 +48,15 @@ export const Developers = () => {
                     </Grid.Row>
 
                     <Grid.Row>
-                        {appState.map((person: IDataModel) => (
+                        {props.appState.map((person: IDataModel) => (
                             <Grid.Column computer={6} mobile={6} key={person.uid}>
                                 <Developer
                                     person={person}
                                     pickDeveloper={pickDeveloper}
                                     getDetail={getDetail}
                                     setIsOpen={setIsOpen}
+                                    isSelected={person.isSelected}
+                                    playSample={play}
                                 />
                             </Grid.Column>
                         ))}

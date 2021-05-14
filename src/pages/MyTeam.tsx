@@ -9,7 +9,7 @@ import useSound from "use-sound";
 
 export const MyTeam = () => {
     const [selectedDevs, setSelectedDevs] = useContext(SelectedDevelopersContext);
-    const [play] = useSound(shotgun, {volume: 0.75 });
+    const [play] = useSound(shotgun, {volume: 0.50 });
     
     const removeDeveloper = (uid: string) => {
         setSelectedDevs(prevSelectedDevs => (

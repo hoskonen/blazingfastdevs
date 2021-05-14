@@ -5,8 +5,13 @@ import {Menu} from "semantic-ui-react";
 import {Home} from "../pages/Home";
 import {MyTeam} from "../pages/MyTeam";
 import {Developers} from "../pages/Developers";
+import {IDataModel} from "../models/Models";
 
-export const Navigation = () => {
+interface IProps {
+    appState: IDataModel[]
+}
+
+export const Navigation = (props: IProps) => {
     return (
         <div className="App">
             <Router>
@@ -39,7 +44,7 @@ export const Navigation = () => {
 
                     <Switch>
                         <Route path="/developers">
-                            <Developers />
+                            <Developers appState={props.appState} />
                         </Route>
                         <Route path="/myteam">
                             <MyTeam />
