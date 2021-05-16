@@ -29,13 +29,12 @@ export const Developer = (props: IProps) => {
                 <Card.Description>
                     {props.person.employment.title}
                 </Card.Description>
-            </Card.Content>
-            <Card.Content extra>
                 <a>
                     <Icon name='user' />
                     {props.person.phone_number}
                 </a>
-                <Segment>
+            </Card.Content>
+                <Segment textAlign='center'>
                     <Button
                         positive
                         onClick={() => {
@@ -43,7 +42,7 @@ export const Developer = (props: IProps) => {
                             props.pickDeveloper(props.person.uid)
                         }}
                     >
-                        Hire Me!
+                        ⛓ Hire Me!
                     </Button>
                     <Button
                         onClick={() => {
@@ -51,10 +50,9 @@ export const Developer = (props: IProps) => {
                             props.setIsOpen(true);
                         }}
                     >
-                        Details
+                        ⚙️ Details
                     </Button>
                 </Segment>
-            </Card.Content>
         </Card>
     )
 }

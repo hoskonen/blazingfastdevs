@@ -13,9 +13,9 @@ export const MyTeam = () => {
         let pick = selectedDevs.find(developer => developer.uid === uid);
         pick.isSelected = false;
         
-        setSelectedDevs(prevSelectedDevs => (
-            prevSelectedDevs.filter(developer => developer.uid !== uid)
-        ));
+    setSelectedDevs(prevSelectedDevs => (
+        prevSelectedDevs.filter(developer => developer.uid !== uid)
+    ));
     }
     
     return (
@@ -43,14 +43,14 @@ export const MyTeam = () => {
                                     {developer.phone_number}
                                         </a>
                                         </Card.Content>
-                                        <Segment>
+                                        <Segment textAlign='center'>
                                             <Button 
                                                 negative
                                                 onClick={() => {
                                                     removeDeveloper(developer.uid)
                                                     play()
                                                 }}
-                                            >Remove
+                                            >Fire him/her ☠️
                                             </Button>
                                         </Segment>
                                     </Card>
