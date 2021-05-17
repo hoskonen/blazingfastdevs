@@ -6,6 +6,7 @@ import {IDataModel, ISelectedModel} from "../models/Models";
 interface IProps {
     person: IDataModel
     pickDeveloper: (uid: string) => void,
+    removeDeveloper: (uid: string) => void,
     getDetail: (uid: string) => void,
     setIsOpen: Dispatch<SetStateAction<boolean>>,
     isSelected: boolean
@@ -35,6 +36,7 @@ export const Developer = (props: IProps) => {
                 </a>
             </Card.Content>
                 <Segment textAlign='center'>
+                    {!props.person.isSelected ?
                     <Button
                         positive
                         onClick={() => {
@@ -44,6 +46,17 @@ export const Developer = (props: IProps) => {
                     >
                         ⛓ Hire Me!
                     </Button>
+                        :
+                    <Button
+                        negative
+                        onClick={() => {
+                            props.removeDeveloper(props.person.uid)
+                        }}
+                    >
+                         🩸 Cancel!
+                    </Button>
+                    }
+                        
                     <Button
                         onClick={() => {
                             props.getDetail(props.person.uid);

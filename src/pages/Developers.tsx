@@ -37,6 +37,15 @@ export const Developers = (props: IProps) => {
         }
     }
 
+    const removeDeveloper = (uid: string) => {
+        let pick = selectedDevs.find(developer => developer.uid === uid);
+        pick.isSelected = false;
+
+        setSelectedDevs(prevSelectedDevs => (
+            prevSelectedDevs.filter(developer => developer.uid !== uid)
+        ));
+    }
+
     return (
         <>
             <div>
@@ -53,6 +62,7 @@ export const Developers = (props: IProps) => {
                                 <Developer
                                     person={person}
                                     pickDeveloper={pickDeveloper}
+                                    removeDeveloper={removeDeveloper}
                                     getDetail={getDetail}
                                     setIsOpen={setIsOpen}
                                     isSelected={person.isSelected}
